@@ -19,7 +19,12 @@ public class LoginService {
 
     public String login(int id){
         UserModel user = userService.procura(id);
-        String token =  generateToken.generateTokenJWT(user);
+        String token;
+        try {
+            token = generateToken.generateTokenJWT(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return token;
 
     }
